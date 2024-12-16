@@ -1,1 +1,1 @@
-![Dropdown Demo](./Alpine_Dropdown.gif)
+<img src="./Alpine_Dropdown.gif" alt="Dropdown Demo" width="300">
