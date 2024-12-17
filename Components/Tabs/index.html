@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../output.css">
+  <script src="//unpkg.com/alpinejs" defer></script>
+  <script src="./app.js"></script>
+</head>
+<body class="bg-gray-900">
+
+<div
+x-data="{
+  tabs: ['Tab1', 'Tab2', 'Tab3'],
+  activeTab: 'Tab1',
+}"
+
+class="m-24"
+>
+<!-- Tab Control -->
+<div class="flex gap-3 text-white">
+  <template x-for="tab in tabs" >
+    <a 
+    @click="activeTab = tab"
+    x-text="tab" class="py-1 px-3 bg-stone-700 hover:bg-stone-500 transition-all duration-200 cursor-pointer rounded-lg"
+
+    :class="activeTab === tab ? 'bg-emerald-800 hover:bg-emerald-800 border border-green-500' : 'border border-stone-500'
+    "></a>
+  </template>
+</div>
+
+<!-- Tab Content -->
+<div class="mt-4 p-4 bg-slate-800 border border-slate-500 rounded-lg">
+  <div x-show="activeTab === 'Tab1'" 
+
+  class="text-white">
+    <!-- Tab1 -->
+     Tab 1 
+  </div>
+  <div x-show="activeTab === 'Tab2'"
+
+  class="text-white">
+    <!-- Tab2 -->
+     Tab 2
+  </div>
+  <div x-show="activeTab === 'Tab3'"  class="text-white">
+    <!-- Tab3 -->
+     Tab 3
+  </div>
+</div>
+
+
+
+</div>
+
+  
+</body>
+</html>
