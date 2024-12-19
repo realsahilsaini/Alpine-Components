@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../output.css">
+  <script src="//unpkg.com/alpinejs" defer></script>
+  <script src="./app.js"></script>
+</head>
+<body class="bg-gray-900">
+
+  <div
+  x-data="{
+    items: [
+      { title: 'What is the capital of France?', body: 'The capital of France is Paris.', visible: false },
+      { title: 'Who is the president of the United States?', body: 'The president of the United States is Joe Biden.', visible: false },
+      { title: 'What is the capital of Spain?', body: 'The capital of Spain is Madrid.', visible: false }
+    ]
+  }"
+>
+  <template x-for="item in items" :key="item.title">
+    <div class="text-white bg-gray-700 px-4 py-3 w-[80%] my-2 rounded-lg" 
+    >
+      <div class="flex justify-around items-center" @click="item.visible = !item.visible">
+        <div x-text="item.title" class="flex-1 hover:text-blue-300"></div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-6 transition-all duration-300"
+          :class="{'rotate-180': item.visible}"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+        </svg>
+      </div>
+
+      <!-- Add smooth transition -->
+      <div
+        x-show="item.visible"
+        x-transition.duration.250ms
+        x-text="item.body"
+        class="mt-2 px-4 py-2 bg-slate-800 rounded-lg overflow-hidden"
+      ></div>
+    </div>
+  </template>
+</div>
+
+
+  
+</body>
+</html>
