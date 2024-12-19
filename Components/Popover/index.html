@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notification with Progress Bar</title>
+  <link rel="stylesheet" href="../output.css">
+  <script src="//unpkg.com/alpinejs" defer></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-900">
+
+  <div
+  x-data="{
+    show: false, 
+    title: 'Popover Title',
+    message: '<b>Popover</b> message goes here',
+  }"
+  class="relative mt-44 ml-24"
+  >
+
+  <button class="inline-flex items-center px-4 py-2 bg-blue-500 text-white rounded-lg" @click="show = !show">
+    Popover
+  </button>
+
+  <div x-show="show" x-transition.duration.300ms 
+  class="w-[200px] absolute bottom-[120%] left-0 shadow-lg">
+    <!-- Header  -->
+    <div class="flex gap-2 justify-between items-center bg-gray-700 text-white font-semibold p-3 rounded-lg">
+      <span x-text="title"></span>
+      <div @click="show = false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 hover:text-red-500">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Body  -->
+  <div x-html="message" class="text-white font-light text-sm mt-2 border border-gray-500 p-3 backdrop-blur-md rounded-lg">
+    </div>
+
+  </div>
+
+</body>
+</html>
+
+
+<!-- What We Know
+-Total Time (timeout):
+The notification will vanish after this.timeout milliseconds. For example, 3000ms (3 seconds).
+
+- Update Frequency:
+The progress bar updates every 100ms (10 times per second). This is fixed by the interval:
+
+setInterval(() => { /* Update logic */ }, 100);
+
+- Progress in Percent:
+The progress bar needs to grow from 0% to 100% during the total time.
+
+--------------------------------------------
+
+How to Calculate the Step Size
+We need to figure out how much the percent value should increase on each update.
+
+- Total Number of Updates:
+Since we are updating every 100ms, the total number of updates is:
+Total Updates= timeout / 100
+
+Example: For a timeout of 3000ms, there will be:
+Total Updates= 3000 / 100 = 30 updates
+
+- Percentage Increment per Update:
+The progress bar must reach 100% in the total number of updates. Therefore, the increment (step size) per update is:
+Step= 100 / Total Updates
+
+Example: For 30 updates, the step size will be:
+Step= 100 / 30 = 3.33 (approximately)
+
+--------------------------------------------
+
+
+Combine the Two Steps:
+
+Substituting Total Updates = timeout / 100 into the formula for Step Size, we get:
+Step= 100 / (timeout / 100) -->
